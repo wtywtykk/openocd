@@ -7676,6 +7676,31 @@ Removes Flash write protection from the selected user bank
 
 @end deffn
 
+@deffn {Flash Driver} {flm}
+Many manufacturers publish their device pack with FLM. It can be used if the device is not
+officialy supported by openocd.
+
+@example
+flash bank $_FLASHNAME flm 0x8000000 0x80000 0 0 $_TARGETNAME "STM32F4xx_512.FLM" 0x20000000
+@end example
+
+The address and size in the command must match those in FLM. 0x20000000 is the base address for FLM.
+The FLM code, stack and temporary buffer will be put to this address.
+
+Also, a stack size can be defined for FLM. The default is 512 bytes.
+
+@example
+flash bank $_FLASHNAME flm 0x8000000 0x80000 0 0 $_TARGETNAME "STM32F4xx_512.FLM" 0x20000000 0x400
+@end example
+
+Some flm-specific commands are defined:
+
+@deffn {Command} {flm mass_erase} num
+Mass erases the entire device.
+The @var{num} parameter is a value shown by @command{flash banks}.
+@end deffn
+@end deffn
+
 @section NAND Flash Commands
 @cindex NAND
 

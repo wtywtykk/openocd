@@ -556,8 +556,8 @@ static int call_plugin_func(struct target *target, int timeout, uint32_t functio
             else
             {
                 init_reg_param(&reg_params[r0ParamIndex + arg], arg_reg_names[arg], 32, PARAM_IN_OUT);
-                reg_param_count = r0ParamIndex + arg + 1;
             }
+            reg_param_count = r0ParamIndex + arg + 1;
             
             buf_set_u32(reg_params[r0ParamIndex + arg].value, 0, 32, argVal);
         }

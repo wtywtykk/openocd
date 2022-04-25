@@ -96,6 +96,7 @@ extern const struct flash_driver xmc1xxx_flash;
 extern const struct flash_driver xmc4xxx_flash;
 
 extern struct flash_driver plugin_flash;
+extern struct flash_driver flm_flash;
 extern struct flash_driver msp432p4_flash;
 extern struct flash_driver aducm302x_flash;
 extern struct flash_driver aducm4x50_flash;
@@ -184,6 +185,7 @@ static const struct flash_driver * const flash_drivers[] = {
 	&w600_flash,
 	&msp432p4_flash,
 	&plugin_flash,
+	&flm_flash,
 	NULL,
 };
 

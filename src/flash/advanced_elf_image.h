@@ -41,7 +41,9 @@ struct advanced_elf_image
 int advanced_elf_image_open(struct advanced_elf_image *image, const char *URL);
 void advanced_elf_image_close(struct advanced_elf_image *image);
 
+uint32_t advanced_elf_image_find_section(struct advanced_elf_image *image, uint32_t mem_addr);
 uint32_t advanced_elf_image_find_symbol(struct advanced_elf_image *image, const char *symbol_name);
 int advanced_elf_image_read_section(struct advanced_elf_image *image, int section, void *buf, size_t buf_size, size_t *done);
+int advanced_elf_image_read_section_offset(struct advanced_elf_image *elf, int section, int offset, void *buf, size_t buf_size, size_t *done);
 
 

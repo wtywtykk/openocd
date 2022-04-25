@@ -67,6 +67,36 @@ int advanced_elf_image_read_section(struct advanced_elf_image *elf, int section,
     return retval;
 }
 
+int advanced_elf_image_read_section_offset(struct advanced_elf_image *elf, int section, int offset, void *buf, size_t buf_size, size_t *done)
+{
+    if (!elf || section < 0 || section >= elf->num_sections || !elf->sections)
+        return ERROR_COMMAND_ARGUMENT_INVALID;
+    
+    int retval = fileio_seek(elf->fileio, elf->sections[section].sh_offset + offset);
+    if (retval != ERROR_OK)
+        return retval;
+    
+    retval = fileio_read(elf->fileio, buf_size, buf, done);
+    return retval;
+}
+
+
+uint32_t advanced_elf_image_find_section(struct advanced_elf_image *image, uint32_t mem_addr)
+{
+    if (!image || !image->num_sections)
+        return 0;
+    
+    for (int i = 0; i < image->num_sections; i++)
+    {
+        if (image->sections[i].sh_addr <= mem_addr && image->sections[i].sh_addr + image->sections[i].sh_size)
+        {
+            return i;
+        }
+    }
+    
+    return 0xffffffff;
+}
+
 
 uint32_t advanced_elf_image_find_symbol(struct advanced_elf_image *image, const char *symbol_name)
 {
