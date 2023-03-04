@@ -31,8 +31,11 @@ struct advanced_elf_image
     Elf32_Shdr *sections;
     int num_sections;
     
-    char *strtab;
-    int strtab_size;
+	char *header_strtab;
+	int header_strtab_size;
+	
+	char *strtab;
+	int strtab_size;
     
     Elf32_Sym *symbols;
     int num_symbols;
@@ -42,6 +45,7 @@ int advanced_elf_image_open(struct advanced_elf_image *image, const char *URL);
 void advanced_elf_image_close(struct advanced_elf_image *image);
 
 uint32_t advanced_elf_image_find_section(struct advanced_elf_image *image, uint32_t mem_addr);
+const char * advanced_elf_image_section_name(struct advanced_elf_image *image, int section);
 uint32_t advanced_elf_image_find_symbol(struct advanced_elf_image *image, const char *symbol_name);
 int advanced_elf_image_read_section(struct advanced_elf_image *image, int section, void *buf, size_t buf_size, size_t *done);
 int advanced_elf_image_read_section_offset(struct advanced_elf_image *elf, int section, int offset, void *buf, size_t buf_size, size_t *done);

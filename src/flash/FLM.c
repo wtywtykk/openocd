@@ -82,6 +82,10 @@ static int flm_load(struct target *target, struct flm_file_info *flm_info, struc
 			continue;		
 		if (flm_info->image.sections[i].sh_type == 8 /* NOBITS */)
 			continue;
+		if (strcmp(advanced_elf_image_section_name(&flm_info->image, i), "DevDscr") == 0)
+			continue;
+		
+		LOG_DEBUG("FLASH flm: loading section %s 0x%08x-0x%08x", advanced_elf_image_section_name(&flm_info->image, i), flm_info->image.sections[i].sh_addr, flm_info->image.sections[i].sh_addr + flm_info->image.sections[i].sh_size);
 			
 		uint8_t* pBuf = malloc(flm_info->image.sections[i].sh_size);
 		size_t done;
